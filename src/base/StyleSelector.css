@@ -1,0 +1,15 @@
+.style-selector {
+    margin: 0 auto;
+}
+
+@media (min-width: 901px) {
+    .style-selector {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 900px) {
+    .style-selector {
+        font-size: 13px;
+    }
+}

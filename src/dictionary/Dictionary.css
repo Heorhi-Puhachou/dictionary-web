@@ -1,0 +1,29 @@
+.filter input[type=text] {
+    width: 100%;
+    font-size: 20px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    text-align: center;
+    margin: 0 auto;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    background-color: #dddddd;
+}
+
+.pagination-panel {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 901px) {
+    .filter input[type=text] {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .filter input[type=text] {
+        font-size: 15px;
+    }
+}

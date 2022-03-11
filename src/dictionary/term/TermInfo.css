@@ -1,0 +1,77 @@
+.term-button-panel {
+    height: 10%;
+}
+
+.term-info-panel {
+    height: 90%;
+    overflow-y: scroll;
+}
+
+h2.headertekst {
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    color: #dddddd;
+}
+
+.wrong-info {
+    color: crimson;
+    padding: 15px;
+    text-shadow: 3px 3px 3px #101010;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.term-back-button {
+
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    border-radius: 12px;
+    font-size: 20px;
+    background-color: #bbbbbb;
+    color: #2b2b5b;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.term-info-block {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.term-text {
+    padding: 15px;
+    color: #dddddd;
+    text-shadow: 3px 3px 3px #101010;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+}
+
+@media (min-width: 901px) {
+    .term-text {
+        font-size: 24px;
+    }
+
+    .wrong-info {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 900px) {
+    .term-text {
+        font-size: 15px;
+    }
+
+    .wrong-info {
+        font-size: 15px;
+    }
+}
+

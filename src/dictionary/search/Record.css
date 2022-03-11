@@ -1,0 +1,53 @@
+.record {
+    display: flex;
+    height: 25%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.record button{
+    border: 2px solid black;
+}
+
+.record button:hover {
+    background-color: #4b4b4b;
+    color: white;
+}
+
+.record-info {
+    width: 90%;
+    height: 90%;
+    background-color: #2b2b2b;
+    border-radius: 12px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
+}
+
+.text-wrapper {
+    width: 90%;
+    height: 80%;
+    color: #dddddd;
+    text-shadow: 3px 3px 3px #101010;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+}
+
+@media (min-width: 901px) {
+    .record {
+        font-size: 20px;
+    }
+    .record button {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .record {
+        font-size: 15px;
+    }
+    .record button {
+        font-size: 15px;
+    }
+}
