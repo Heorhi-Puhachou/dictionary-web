@@ -6,8 +6,6 @@ import {TARASK} from "../styles/tarask";
 
 const styleGuideMap = new Map();
 const linksMap = new Map();
-const termsMap = new Map();
-const unionMap = new Map();
 
 const styleReducer = (state = {
     style: TARASK_TAG,
@@ -15,7 +13,8 @@ const styleReducer = (state = {
     labels: TARASK,
     ruleGroups: [],
     linkGroups: [],
-    terms: []
+    terms: [],
+    unionMap: new Map()
 }, action) => {
     if (action.type === NARKAM_TAG) {
         return {
@@ -25,6 +24,7 @@ const styleReducer = (state = {
             ruleGroups: styleGuideMap.get(action.type) ? styleGuideMap.get(action.type) : [],
             linkGroups: linksMap.get(action.type) ? linksMap.get(action.type) : [],
             terms: state.terms,
+            unionMap: state.unionMap
         };
     }
     if (action.type === LACINK_TAG) {
@@ -35,6 +35,7 @@ const styleReducer = (state = {
             ruleGroups: styleGuideMap.get(action.type) ? styleGuideMap.get(action.type) : [],
             linkGroups: linksMap.get(action.type) ? linksMap.get(action.type) : [],
             terms: state.terms,
+            unionMap: state.unionMap
         };
     }
     if (action.type === TARASK_TAG) {
@@ -45,6 +46,7 @@ const styleReducer = (state = {
             ruleGroups: styleGuideMap.get(action.type) ? styleGuideMap.get(action.type) : [],
             linkGroups: linksMap.get(action.type) ? linksMap.get(action.type) : [],
             terms: state.terms,
+            unionMap: state.unionMap
         };
     }
 
@@ -55,7 +57,8 @@ const styleReducer = (state = {
             labels: state.labels,
             ruleGroups: state.ruleGroups,
             linkGroups: state.linkGroups,
-            terms: state.terms
+            terms: state.terms,
+            unionMap: state.unionMap
         };
     }
 
@@ -63,7 +66,7 @@ const styleReducer = (state = {
         let keys = [];
         for (let key in action.unionMap) {
             if (action.unionMap.hasOwnProperty(key)) {
-                unionMap.set(key, action.unionMap[key]);
+                state.unionMap.set(key, action.unionMap[key]);
                 keys.push(key);
             }
         }
@@ -73,7 +76,8 @@ const styleReducer = (state = {
             labels: state.labels,
             ruleGroups: state.ruleGroups,
             linkGroups: state.linkGroups,
-            terms: keys
+            terms: keys,
+            unionMap: state.unionMap
         };
     }
 

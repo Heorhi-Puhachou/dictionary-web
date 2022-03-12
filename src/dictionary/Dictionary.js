@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './Dictionary.css';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {LACINK_TAG, NARKAM_TAG, TARASK_TAG} from "../base/constant";
 import {useDispatch, useSelector} from "react-redux";
 import SearchList from "./search/SearcList";
 import TermInfo from "./term/TermInfo";
@@ -12,6 +11,7 @@ function Dictionary() {
 
     const dictionaries = useSelector(state => state.dictionaries);
     const terms = useSelector(state => state.terms);
+    const unionMap = useSelector(state => state.unionMap);
     const dispatch = useDispatch();
 
 
@@ -81,6 +81,10 @@ function Dictionary() {
         filterGlosses(filterValue);
     }, [terms]);
 
+    useEffect(() => {
+        filterGlosses(filterValue);
+    }, [dictionaries]);
+
     const updatePage = (page) => {
         setCurrentPage(page);
         navigate(`${location.pathname}?filter=${filterValue}&page=${page}&dictionaries=${dictionaries}`);
@@ -90,10 +94,19 @@ function Dictionary() {
         updatePage(1);
     };
 
-    const filterGlosses = value => {
-        setFilteredTerms(
-            terms.filter(
-                item => item.toLowerCase().includes(value.toLowerCase())));
+    const filterGlosses = filterValue => {
+        let filtered = [];
+        if (unionMap) {
+            for (let [key, value] of unionMap) {
+                console.log(key);
+                const fil = key.toLowerCase().includes(filterValue.toLowerCase());
+                const dic = hasDictionary(value, dictionaries);
+                if (fil && dic) {
+                    filtered.push(key);
+                }
+            }
+        }
+        setFilteredTerms(filtered);
     };
 
     const onFilterChange = value => {
