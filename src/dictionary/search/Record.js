@@ -5,10 +5,10 @@ export function Record(item, setSelectedItem) {
     return (
         <div className='record'
 
-             key={item.id}>
-            <button onClick={() => setSelectedItem(item.id)} className="record-info">
+             key={item}>
+            <button onClick={() => setSelectedItem(item)} className="record-info">
                 <div className="text-wrapper">
-                    {item.originalValue + ' - ' + item.value}
+                    {item}
                 </div>
             </button>
         </div>

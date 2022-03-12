@@ -5,10 +5,12 @@ import React, {useEffect} from 'react';
 import {LACINK_TAG, NARKAM_TAG, TARASK_TAG} from './constant';
 import {StyleSelector} from './StyleSelector';
 import {useDispatch, useSelector} from "react-redux";
+import {DictionarySelector} from "./DictionarySelector";
 
 function Base() {
 
     const style = useSelector(state => state.style);
+    const dictionaries = useSelector(state => state.dictionaries);
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -26,12 +28,19 @@ function Base() {
             dispatch({type: TARASK_TAG});
         }
 
+        const queryParams = new URLSearchParams(location.search);
+        const dictionaries = queryParams.get('dictionaries') === null ? 'abc' : queryParams.get('dictionaries');
+        dispatch({type: 'setDictionaries', dictionaries: dictionaries});
+
     }, []);
 
     return (
         <div id="base" className="display-linebreak">
             <div className="style">
                 <StyleSelector/>
+            </div>
+            <div className="style">
+                <DictionarySelector/>
             </div>
             <Routes>
                 <Route key='1' path={`/${style}`} element={<Dictionary/>}/>

@@ -13,15 +13,14 @@ const TermInfo = (props) => {
 
     }, []);
 
-    const term = terms.filter(
-        item => item.id === props.termId)[0];
+    const term = props.termId;
 
     const wrongSection = <div>
         <h2 className="headertekst">{labels.wrong_usage}</h2>
         <div className='term-info-block'>
             <div className="record-info">
                 <div className="wrong-info">
-                    {term.wrong}
+                    {term}
                 </div>
             </div>
         </div>
@@ -34,7 +33,7 @@ const TermInfo = (props) => {
             <div className='term-info-block'>
                 <div className="record-info">
                     <div className="term-text">
-                        {term.comment}
+                        {term}
                     </div>
                 </div>
             </div>
@@ -50,7 +49,7 @@ const TermInfo = (props) => {
                     <div className='term-info-block'>
                         <div className="record-info">
                             <div className="term-text">
-                                {term.originalValue + ' - ' + term.value}
+                                {term}
                             </div>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ import Preloader from "../base/Preloader";
 
 function Dictionary() {
 
-    const style = useSelector(state => state.style);
+    const dictionaries = useSelector(state => state.dictionaries);
     const terms = useSelector(state => state.terms);
     const dispatch = useDispatch();
 
@@ -36,38 +36,45 @@ function Dictionary() {
         setLoading(false);
     };
 
-    const getTermUrl = tag => {
-        return 'https://raw.githubusercontent.com/Heorhi-Puhachou/excel_json_parser/main/generated/glossary/' + tag + '.json';
+    const getTermUrl = () => {
+        return 'https://raw.githubusercontent.com/Heorhi-Puhachou/dictionary-converter/main/generated/union.json';
     };
+
+    const filterTerms = (allTerms) => {
+        let filtered = [];
+        for (const [key, value] of Object.entries(allTerms)) {
+            console.log(key, value);
+            if(hasDictionary(value, dictionaries)){
+                filtered.push(key);
+            }
+        }
+        return filtered;
+    };
+
+    const hasDictionary = (array, dictionaryIds) => {
+        for (let index = 0; index < array.length; index++) {
+            if (dictionaryIds.indexOf(array[index].dictionaryId)>-1) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     useEffect(() => {
         if (loading) {
-            const termsMap = new Map();
-            fetch(getTermUrl(NARKAM_TAG))
+            fetch(getTermUrl())
                 .then(response => response.json())
                 .then(jsonData => {
-                    termsMap.set(NARKAM_TAG, jsonData);
-                    fetch(getTermUrl(LACINK_TAG))
-                        .then(response => response.json())
-                        .then(jsonData => {
-                            termsMap.set(LACINK_TAG, jsonData);
-                            fetch(getTermUrl(TARASK_TAG))
-                                .then(response => response.json())
-                                .then(jsonData => {
-                                    termsMap.set(TARASK_TAG, jsonData);
-                                    dispatch({type: 'addT', termsMap: termsMap});
-                                    setFilteredTerms(termsMap.get(style)[0]);
-                                    setTimeout(stopLoading, 500);
-                                });
-                        });
+                    dispatch({type: 'addUnionMap', unionMap: jsonData});
+                    setFilteredTerms(filterTerms(jsonData));
+                    setTimeout(stopLoading, 500);
                 });
-
         } else {
-            setFilteredTerms(terms);
+            setFilteredTerms(filterTerms(terms));
             setTimeout(stopLoading, 500);
         }
-
     }, []);
+
 
 
     useEffect(() => {
@@ -76,7 +83,7 @@ function Dictionary() {
 
     const updatePage = (page) => {
         setCurrentPage(page);
-        navigate(`${location.pathname}?filter=${filterValue}&page=${page}`);
+        navigate(`${location.pathname}?filter=${filterValue}&page=${page}&dictionaries=${dictionaries}`);
     };
 
     const resetCurrentPage = () => {
@@ -86,24 +93,24 @@ function Dictionary() {
     const filterGlosses = value => {
         setFilteredTerms(
             terms.filter(
-                item => item.originalValue.toLowerCase().includes(value.toLowerCase())));
+                item => item.toLowerCase().includes(value.toLowerCase())));
     };
 
     const onFilterChange = value => {
         filterGlosses(value);
         resetCurrentPage();
         setFilterValue(value);
-        navigate(`${location.pathname}?filter=${value}&page=1`);
+        navigate(`${location.pathname}?filter=${value}&page=1&dictionaries=${dictionaries}`);
     };
 
     const resetSelectedItem = () => {
         setSelectedItemId(null);
-        navigate(`${location.pathname}?filter=${filter}&page=${page}`);
+        navigate(`${location.pathname}?filter=${filter}&page=${page}&dictionaries=${dictionaries}`);
     };
 
     const onItemSelect = (id) => {
         setSelectedItemId(id);
-        navigate(`${location.pathname}?termId=${id}`);
+        navigate(`${location.pathname}?termId=${id}&dictionaries=${dictionaries}`);
     };
 
     if (loading) {
