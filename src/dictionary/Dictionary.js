@@ -95,7 +95,6 @@ function Dictionary() {
         let filtered = [];
         if (unionMap) {
             for (let [key, value] of unionMap) {
-                console.log(key);
                 const fil = key.toLowerCase().includes(filterValue.toLowerCase());
                 const dic = hasDictionary(value, dictionaries);
                 if (fil && dic) {

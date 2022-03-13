@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./TermInfo.css"
 import {useDispatch, useSelector} from "react-redux";
 import {DictionaryRecord} from "./DictionaryRecord";
@@ -11,15 +11,26 @@ const TermInfo = (props) => {
     const queryParams = new URLSearchParams(location.search);
 
     const style = useSelector(state => state.style);
+
+
+    const urlDictionaries = queryParams.get('dictionaries') === null ? 'abc' : queryParams.get('dictionaries');
+    const storeDictionaries = useSelector(state => state.dictionaries);
+    const dictionaries = storeDictionaries ? storeDictionaries : urlDictionaries;
+
     const labels = useSelector(state => state.labels);
     const termsMap = useSelector(state => state.termsMap);
     const unionMap = useSelector(state => state.unionMap);
     const term = queryParams.get('termId') === null ? null : queryParams.get('termId');
     const relations = unionMap.get(term) === null ? [] : unionMap.get(term);
 
+    const [filteredRelations, setFilteredRelations] = useState(relations.filter(relation => dictionaries.indexOf(relation.dictionaryId) > -1));
+
     useEffect(() => {
+        setFilteredRelations(relations.filter(relation => dictionaries.indexOf(relation.dictionaryId) > -1));
+    }, [dictionaries]);
 
-
+    useEffect(() => {
+        filteredRelations.forEach(relation => getText(relation.dictionaryId, relation.termId, style));
     }, []);
 
 
@@ -34,6 +45,7 @@ const TermInfo = (props) => {
                 .then(jsonData => {
                     dispatch({type: 'addTermsForStyleAndDictionary', key: key, json: jsonData});
                     const found = jsonData.find(element => element.id === termId);
+                    setFilteredRelations(relations.filter(relation => dictionaries.indexOf(relation.dictionaryId) > -1));
                     return found.information;
                 });
         }
@@ -48,7 +60,7 @@ const TermInfo = (props) => {
                     <h2 className="headertekst">{term}</h2>
                 </div>
                 <div className="records">
-                    {relations.map((item) => DictionaryRecord(item.dictionaryId, item.termId, getText(item.dictionaryId, item.termId, style)))}
+                    {filteredRelations.map((item) => DictionaryRecord(item.dictionaryId, item.termId, getText(item.dictionaryId, item.termId, style)))}
                 </div>
             </div>
 
