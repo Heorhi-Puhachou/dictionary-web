@@ -1,5 +1,5 @@
 body {
-    background-color: #211d1d;
+    background-color: #3c3f41;
     margin: 0;
     padding: 0;
 
@@ -26,7 +26,7 @@ html, body {
 }
 
 .title {
-    background: #efeaea;
+    background: #3c3f41;
     height: 6%;
     display: flex;
     justify-content: center;
@@ -37,11 +37,11 @@ html, body {
 
 .style {
     height: 5%;
-    background: #efeaea;
+    background: #3c3f41;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #1b1b2b;
+    color: #5b8ab8;
 }
 
 .tabs-panel {
