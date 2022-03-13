@@ -25,16 +25,6 @@ html, body {
     width: 100%;
 }
 
-.title {
-    background: #3c3f41;
-    height: 6%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1b1b2b;
-    text-shadow: 1px 1px 2px #a1adad;
-}
-
 .style {
     height: 5%;
     background: #3c3f41;
@@ -44,12 +34,8 @@ html, body {
     color: #5b8ab8;
 }
 
-.tabs-panel {
-    height: 89%;
-}
-
 .tab-content {
-    height: 82%;
+    height: 90%;
 }
 
 @media (min-width: 901px) {

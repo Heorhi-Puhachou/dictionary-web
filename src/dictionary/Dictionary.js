@@ -15,7 +15,7 @@ function Dictionary() {
     const dispatch = useDispatch();
 
 
-    const countPerPage = 4;
+    const countPerPage = 5;
     const [filteredTerms, setFilteredTerms] = useState([]);
 
 
@@ -31,7 +31,6 @@ function Dictionary() {
     const [currentPage, setCurrentPage] = useState(page);
     const [filterValue, setFilterValue] = useState(filter);
     const [selectedItemId, setSelectedItemId] = useState(termId);
-    const [selectedItemRelations, setSelectedItemRelations] = useState(unionMap.get(termId));
 
     const stopLoading = () => {
         setLoading(false);
@@ -114,13 +113,11 @@ function Dictionary() {
 
     const resetSelectedItem = () => {
         setSelectedItemId(null);
-        setSelectedItemRelations(null);
         navigate(`${location.pathname}?filter=${filter}&page=${page}&dictionaries=${dictionaries}`);
     };
 
     const onItemSelect = (id) => {
         setSelectedItemId(id);
-        setSelectedItemRelations(unionMap.get(id));
         navigate(`${location.pathname}?termId=${id}&dictionaries=${dictionaries}`);
     };
 

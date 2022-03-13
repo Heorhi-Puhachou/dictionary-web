@@ -1,5 +1,4 @@
 import React from 'react';
-import * as constants from './constant';
 import './StyleSelector.css';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router-dom";

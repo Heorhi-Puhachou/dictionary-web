@@ -9,6 +9,8 @@
 
 h2.headertekst {
     padding: 10px;
+    font-size: 35px;
+    text-shadow: 2px 2px 4px #101010;
     margin: 0;
     text-align: center;
     color: #dddddd;
