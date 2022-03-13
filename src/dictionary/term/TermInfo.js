@@ -1,63 +1,57 @@
 import React, {useEffect} from "react";
 import "./TermInfo.css"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {DictionaryRecord} from "./DictionaryRecord";
+import {useLocation} from "react-router-dom";
 
 const TermInfo = (props) => {
+    const location = useLocation();
+    const dispatch = useDispatch();
+
+    const queryParams = new URLSearchParams(location.search);
+
+    const style = useSelector(state => state.style);
     const labels = useSelector(state => state.labels);
-
-
-    const terms = useSelector(state => state.terms);
+    const termsMap = useSelector(state => state.termsMap);
+    const unionMap = useSelector(state => state.unionMap);
+    const term = queryParams.get('termId') === null ? null : queryParams.get('termId');
+    const relations = unionMap.get(term) === null ? [] : unionMap.get(term);
 
     useEffect(() => {
 
 
     }, []);
 
-    const term = props.termId;
 
-    const wrongSection = <div>
-        <h2 className="headertekst">{labels.wrong_usage}</h2>
-        <div className='term-info-block'>
-            <div className="record-info">
-                <div className="wrong-info">
-                    {term}
-                </div>
-            </div>
-        </div>
-    </div>;
+    const getText = (dictionaryId, termId, style) => {
+        const key = dictionaryId + style;
+        if (termsMap.get(key)) {
+            const found = termsMap.get(key).find(element => element.id === termId);
+            return found.information;
+        } else {
+            fetch('https://raw.githubusercontent.com/Heorhi-Puhachou/dictionary-converter/main/generated/' + dictionaryId + '/' + style + '.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    dispatch({type: 'addTermsForStyleAndDictionary', key: key, json: jsonData});
+                    const found = jsonData.find(element => element.id === termId);
+                    return found.information;
+                });
+        }
+    }
 
-
-    const commentSection = <div>
-        <div>
-            <h2 className="headertekst">{labels.comment}</h2>
-            <div className='term-info-block'>
-                <div className="record-info">
-                    <div className="term-text">
-                        {term}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>;
 
     return (
         <div className="tab-content">
             <div className="term-stub-panel"/>
             <div className="term-info-panel">
                 <div>
-                    <h2 className="headertekst">{labels.term + ' № ' + props.termId}</h2>
-                    <div className='term-info-block'>
-                        <div className="record-info">
-                            <div className="term-text">
-                                {term}
-                            </div>
-                        </div>
-                    </div>
+                    <h2 className="headertekst">{term}</h2>
                 </div>
-
-                {term.wrong && wrongSection}
-                {term.comment && commentSection}
+                <div className="records">
+                    {relations.map((item) => DictionaryRecord(item.dictionaryId, item.termId, getText(item.dictionaryId, item.termId, style)))}
+                </div>
             </div>
+
 
             < div className="term-button-panel">
                 <button className='term-back-button' onClick={() => props.resetSelectedItem()}>{labels.back}</button>

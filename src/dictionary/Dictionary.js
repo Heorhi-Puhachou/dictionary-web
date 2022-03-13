@@ -31,13 +31,10 @@ function Dictionary() {
     const [currentPage, setCurrentPage] = useState(page);
     const [filterValue, setFilterValue] = useState(filter);
     const [selectedItemId, setSelectedItemId] = useState(termId);
+    const [selectedItemRelations, setSelectedItemRelations] = useState(unionMap.get(termId));
 
     const stopLoading = () => {
         setLoading(false);
-    };
-
-    const getTermUrl = () => {
-        return 'https://raw.githubusercontent.com/Heorhi-Puhachou/dictionary-converter/main/generated/union.json';
     };
 
     const filterTerms = (allTerms) => {
@@ -62,7 +59,7 @@ function Dictionary() {
 
     useEffect(() => {
         if (loading) {
-            fetch(getTermUrl())
+            fetch('https://raw.githubusercontent.com/Heorhi-Puhachou/dictionary-converter/main/generated/union.json')
                 .then(response => response.json())
                 .then(jsonData => {
                     dispatch({type: 'addUnionMap', unionMap: jsonData});
@@ -118,11 +115,13 @@ function Dictionary() {
 
     const resetSelectedItem = () => {
         setSelectedItemId(null);
+        setSelectedItemRelations(null);
         navigate(`${location.pathname}?filter=${filter}&page=${page}&dictionaries=${dictionaries}`);
     };
 
     const onItemSelect = (id) => {
         setSelectedItemId(id);
+        setSelectedItemRelations(unionMap.get(id));
         navigate(`${location.pathname}?termId=${id}&dictionaries=${dictionaries}`);
     };
 

@@ -14,6 +14,7 @@ const styleReducer = (state = {
     ruleGroups: [],
     linkGroups: [],
     terms: [],
+    termsMap: new Map(),
     unionMap: new Map()
 }, action) => {
     if (action.type === NARKAM_TAG) {
@@ -24,7 +25,8 @@ const styleReducer = (state = {
             ruleGroups: styleGuideMap.get(action.type) ? styleGuideMap.get(action.type) : [],
             linkGroups: linksMap.get(action.type) ? linksMap.get(action.type) : [],
             terms: state.terms,
-            unionMap: state.unionMap
+            unionMap: state.unionMap,
+            termsMap: state.termsMap,
         };
     }
     if (action.type === LACINK_TAG) {
@@ -35,7 +37,8 @@ const styleReducer = (state = {
             ruleGroups: styleGuideMap.get(action.type) ? styleGuideMap.get(action.type) : [],
             linkGroups: linksMap.get(action.type) ? linksMap.get(action.type) : [],
             terms: state.terms,
-            unionMap: state.unionMap
+            unionMap: state.unionMap,
+            termsMap: state.termsMap,
         };
     }
     if (action.type === TARASK_TAG) {
@@ -46,7 +49,8 @@ const styleReducer = (state = {
             ruleGroups: styleGuideMap.get(action.type) ? styleGuideMap.get(action.type) : [],
             linkGroups: linksMap.get(action.type) ? linksMap.get(action.type) : [],
             terms: state.terms,
-            unionMap: state.unionMap
+            unionMap: state.unionMap,
+            termsMap: state.termsMap,
         };
     }
 
@@ -58,7 +62,22 @@ const styleReducer = (state = {
             ruleGroups: state.ruleGroups,
             linkGroups: state.linkGroups,
             terms: state.terms,
-            unionMap: state.unionMap
+            unionMap: state.unionMap,
+            termsMap: state.termsMap,
+        };
+    }
+
+    if (action.type === 'addTermsForStyleAndDictionary') {
+        state.termsMap.set(action.key, action.json);
+        return {
+            style: state.style,
+            dictionaries: state.dictionaries,
+            labels: state.labels,
+            ruleGroups: state.ruleGroups,
+            linkGroups: state.linkGroups,
+            terms: state.terms,
+            unionMap: state.unionMap,
+            termsMap: state.termsMap,
         };
     }
 
@@ -77,12 +96,12 @@ const styleReducer = (state = {
             ruleGroups: state.ruleGroups,
             linkGroups: state.linkGroups,
             terms: keys,
-            unionMap: state.unionMap
+            unionMap: state.unionMap,
+            termsMap: state.termsMap,
         };
     }
 
     return state;
-
 
 };
 

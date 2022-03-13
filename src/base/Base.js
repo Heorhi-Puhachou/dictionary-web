@@ -10,7 +10,6 @@ import {DictionarySelector} from "./DictionarySelector";
 function Base() {
 
     const style = useSelector(state => state.style);
-    const dictionaries = useSelector(state => state.dictionaries);
     const dispatch = useDispatch();
     const location = useLocation();
 
