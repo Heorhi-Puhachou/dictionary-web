@@ -6,10 +6,6 @@
     padding-bottom: 17px;
 }
 
-.dictionary-record button{
-    border: 2px solid black;
-}
-
 .dictionary-record-info {
     width: 90%;
     height: 90%;
@@ -35,6 +31,11 @@
     .dictionary-record button {
         font-size: 20px;
     }
+
+    .dictionary-text-wrapper {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 }
 
 @media (max-width: 900px) {
@@ -43,5 +44,10 @@
     }
     .dictionary-record button {
         font-size: 15px;
+    }
+
+    .dictionary-text-wrapper {
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 }

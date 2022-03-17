@@ -16,15 +16,6 @@ h2.headertekst {
     color: #dddddd;
 }
 
-.wrong-info {
-    color: crimson;
-    padding: 15px;
-    text-shadow: 3px 3px 3px #101010;
-    display: flex;
-    margin: 0 auto;
-    align-items: center;
-}
-
 .term-back-button {
 
     width: 80%;
@@ -62,8 +53,8 @@ h2.headertekst {
         font-size: 24px;
     }
 
-    .wrong-info {
-        font-size: 24px;
+    h2.headertekst {
+        font-size: 35px;
     }
 }
 
@@ -72,8 +63,8 @@ h2.headertekst {
         font-size: 15px;
     }
 
-    .wrong-info {
-        font-size: 15px;
+    h2.headertekst {
+        font-size: 25px;
     }
 }
 

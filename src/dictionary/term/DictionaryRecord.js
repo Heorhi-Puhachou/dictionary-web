@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 const DictionaryRecord = props => {
 
+    const labels = useSelector(state => state.labels);
     const termsMap = useSelector(state => state.termsMap);
     const style = useSelector(state => state.style);
     const dispatch = useDispatch();
@@ -40,13 +41,13 @@ const DictionaryRecord = props => {
 
     const getDictionaryName = (dictionaryId) => {
         if (dictionaryId === 'a') {
-            return 'Гласарый перакладчыкаў Ubuntu';
+            return labels.a_dictionary;
         }
         if (dictionaryId === 'b') {
-            return 'Proton Terms by Košal&Turok';
+            return labels.b_dictionary;
         }
         if (dictionaryId === 'c') {
-            return 'Test dictionary'
+            return labels.c_dictionary;
         }
     }
 
