@@ -43,19 +43,19 @@ export function DictionarySelector() {
                    name="dictionary"
                    checked={storeDictionaries.includes('a')}
                    onChange={() => {
-                   }}/>{'a'}
+                   }}/>{'Ubuntu'}
             <input type="checkbox"
                    value='b'
                    name="dictionary"
                    checked={storeDictionaries.includes('b')}
                    onChange={() => {
-                   }}/>{'b'}
+                   }}/>{'Proton'}
             <input type="checkbox"
                    value='c'
                    name="dictionary"
                    checked={storeDictionaries.includes('c')}
                    onChange={() => {
-                   }}/>{'c'}
+                   }}/>{'test'}
         </div>
     );
 }
