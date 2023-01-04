@@ -24,7 +24,7 @@ const TermInfo = (props) => {
     }, [dictionaries]);
 
     return (
-        <div className="tab-content">
+        <div className="tab-content" >
             <div className="term-stub-panel"/>
             <div className="term-info-panel">
                 <div>

@@ -32,7 +32,7 @@ const DictionaryRecord = props => {
                     const found = jsonData.find(element => element.id === props.termId);
                     setText(found.information);
                 });
-        }else{
+        } else {
             const found = termsMap.get(key).find(element => element.id === props.termId);
             setText(found.information);
         }
@@ -49,16 +49,38 @@ const DictionaryRecord = props => {
         if (dictionaryId === 'c') {
             return labels.c_dictionary;
         }
+        if (dictionaryId === 'd') {
+            return labels.d_dictionary;
+        }
+        if (dictionaryId === 'e') {
+            return labels.e_dictionary;
+        }
     }
-
-    return (<div className='dictionary-record'
-                 key={props.dictionaryId}>
-        <div className="dictionary-record-info">
-            <div className="dictionary-text-wrapper">
-                {text + '\n\n© ' + getDictionaryName(props.dictionaryId)}
-            </div>
-        </div>
-    </div>);
+    if (props.dictionaryId === 'd') {
+        return (
+            <div className='dictionary-record' key={props.dictionaryId}>
+                <div className="dictionary-record-info">
+                    <div className="dictionary-text-wrapper" key='text'>
+                        {text + '\n\n'}
+                    </div>
+                    <div className="dictionary-text-wrapper" key='color' style={text?{backgroundColor: text.substr(text.length - 7)}:{}}>
+                        {'\n\n'}
+                    </div>
+                    <div className="dictionary-text-wrapper" key='dictionary'>
+                        {'\n\n© ' + getDictionaryName(props.dictionaryId)}
+                    </div>
+                </div>
+            </div>);
+    } else {
+        return (
+            <div className='dictionary-record' key={props.dictionaryId}>
+                <div className="dictionary-record-info">
+                    <div className="dictionary-text-wrapper">
+                        {text + '\n\n© ' + getDictionaryName(props.dictionaryId)}
+                    </div>
+                </div>
+            </div>);
+    }
 }
 
 export default DictionaryRecord;

@@ -10,7 +10,7 @@ export function DictionarySelector() {
     const location = useLocation();
 
     const queryParams = new URLSearchParams(location.search);
-    const urlDictionaries = queryParams.get('dictionaries') === null ? 'abc' : queryParams.get('dictionaries');
+    const urlDictionaries = queryParams.get('dictionaries') === null ? 'abcde' : queryParams.get('dictionaries');
     const storeDictionaries = useSelector(state => state.dictionaries);
 
 
@@ -55,7 +55,19 @@ export function DictionarySelector() {
                    name="dictionary"
                    checked={storeDictionaries.includes('c')}
                    onChange={() => {
-                   }}/>{'test'}
+                   }}/>{'Puhachou'}
+            <input type="checkbox"
+                   value='d'
+                   name="dictionary"
+                   checked={storeDictionaries.includes('d')}
+                   onChange={() => {
+                   }}/>{'Color'}
+            <input type="checkbox"
+                   value='e'
+                   name="dictionary"
+                   checked={storeDictionaries.includes('e')}
+                   onChange={() => {
+                   }}/>{'Skalkovič'}
         </div>
     );
 }

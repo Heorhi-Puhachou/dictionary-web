@@ -28,7 +28,7 @@ function Base() {
         }
 
         const queryParams = new URLSearchParams(location.search);
-        const dictionaries = queryParams.get('dictionaries') === null ? 'abc' : queryParams.get('dictionaries');
+        const dictionaries = queryParams.get('dictionaries') === null ? 'abcde' : queryParams.get('dictionaries');
         dispatch({type: 'setDictionaries', dictionaries: dictionaries});
 
     }, []);

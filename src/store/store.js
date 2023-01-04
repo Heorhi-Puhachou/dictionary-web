@@ -9,7 +9,7 @@ const linksMap = new Map();
 
 const styleReducer = (state = {
     style: TARASK_TAG,
-    dictionaries: 'abc',
+    dictionaries: 'abcde',
     labels: TARASK,
     ruleGroups: [],
     linkGroups: [],
